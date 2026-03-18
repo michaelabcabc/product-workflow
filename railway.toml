@@ -2,14 +2,8 @@
 builder = "DOCKERFILE"
 
 [deploy]
-startCommand = "uvicorn app:app --host 0.0.0.0 --port $PORT"
+startCommand = "uvicorn app:app --host 0.0.0.0 --port 8000"
 healthcheckPath = "/health"
 healthcheckTimeout = 30
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 3
-
-# ── 定时任务（每天早上 9 点自动运行一次）─────────────
-# 如需修改，去 Railway 控制台 → 服务 → Cron Jobs 中调整
-# [[cronJobs]]
-# schedule = "0 9 * * *"
-# command = "curl -X POST http://localhost:$PORT/cron/run -H 'Content-Type: application/json' -d '{\"secret\": \"$CRON_SECRET\"}'"
